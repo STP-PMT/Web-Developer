@@ -80,10 +80,6 @@ ul {
     background-color: #140f30ce;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 .item {
     width: 100%;
     height: 100%;
@@ -95,11 +91,11 @@ ul {
     font-size: 3em;
 }
 
-[aos="fadea"] {
-    opacity: 0;
-    transition-property: opacity;
-}
-
-[aos="fade"].aos-animate {
-    opacity: 1;
+th {
+    width: 320px;
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 0;
+    font-size: 20;
+    color: #FFF;
 }
