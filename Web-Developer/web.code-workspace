@@ -14,9 +14,12 @@
 		},
 		{
 			"path": "Lab0302"
+		},
+		{
+			"path": "eNno"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "Lab0302"
+		"liveServer.settings.multiRootWorkspaceName": "eNno"
 	}
 }
