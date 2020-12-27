@@ -32,7 +32,7 @@
 </head>
 
 <body id="page-top">
-    <form action="student.php" class="php-email-form">
+    <form action="student.php" method="POST" class="php-email-form">
         <main id="main">
             <!-- ======= Contact Section ======= -->
             <section class="footer-paralax bg-image sect-mt4 route" style="background-image: url(assets/img/overlay-bg.jpg)">
@@ -55,7 +55,8 @@
                                                 </p>
 
                                             </div>
-                                            <div class="error-message"></div>
+                                            <?php include 'student.php'; ?>
+                                            <!-- <div class="error-message"></div> -->
                                         </div>
                                         <div class="col-md-6">
                                             <div class="title-box-2">
@@ -67,10 +68,9 @@
                                             <div>
                                                 <table>
                                                     <tr>
-                                                        <td id="1">
+                                                        <td>
                                                             <input type="radio" name="mode" value="add">Add
                                                             <input type="radio" name="mode" value="delete">Delete
-                                                            <input type="radio" name="mode" value="show">Show
                                                             <input type="radio" name="mode" value="edit">edit
                                                         </td>
                                                     </tr>
@@ -111,10 +111,6 @@
                                                             <input type="date" class="form-control" name="birthday" placeholder="วันเกิด">
                                                             <div class="validate"></div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-12 text-center mb-3">
-                                                        <div class="loading">Loading</div>
-                                                        <div class="sent-message">Save</div>
                                                     </div>
                                                     <div class="col-md-12 text-center">
                                                         <button type="submit" class="button button-a button-big button-rouded">ส่ง</button>
@@ -158,14 +154,14 @@
     </footer>
     <!-- End  Footer -->
 
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    <div id="preloader"></div>
+    <!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <div id="preloader"></div> -->
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/jquery/jquery.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
     <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
     <script src="assets/vendor/counterup/jquery.counterup.min.js"></script>
     <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
