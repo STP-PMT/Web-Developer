@@ -29,9 +29,12 @@
 		},
 		{
 			"path": "Lab0403"
+		},
+		{
+			"path": "Lab0403s"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "Lab0401"
+		"liveServer.settings.multiRootWorkspaceName": "LabResume"
 	}
 }

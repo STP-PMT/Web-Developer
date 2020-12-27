@@ -1,6 +1,6 @@
 <html>
     <body>
-        <form action="" >
+        <form action="student.php" >
             <table>
                 <tr>
                     <td colspan=2>
