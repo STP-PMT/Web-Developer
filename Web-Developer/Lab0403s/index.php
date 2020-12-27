@@ -70,9 +70,9 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <input type="radio" name="mode" value="add">Add
-                                                            <input type="radio" name="mode" value="delete">Delete
-                                                            <input type="radio" name="mode" value="edit">edit
+                                                            <input type="radio" name="mode" value="add">เพิ่มข้อมูล
+                                                            <input type="radio" name="mode" value="delete">ลบ
+                                                            <input type="radio" name="mode" value="edit">แก้ไข
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -109,6 +109,7 @@
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
+                                                            วันเกิด
                                                             <input type="date" class="form-control" name="birthday" placeholder="วันเกิด">
                                                             <div class="validate"></div>
                                                         </div>
@@ -133,26 +134,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="copyright-box">
-                        <p class="copyright">&copy; Copyright <strong>Me?</strong>. All Rights Reserved</p>
-                        <div class="credits">
-                            <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
-            -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+   
     <!-- End  Footer -->
 
     <!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
