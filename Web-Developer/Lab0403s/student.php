@@ -75,7 +75,6 @@ if ($mode == "add") {
     header('Location: index.php');
 } elseif ($mode == "show") {
 } elseif ($mode == "save") {
-    echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     $idx = 0;
     foreach ($_SESSION['students'] as $s) {
         if ($s->id == $id) {

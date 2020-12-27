@@ -55,6 +55,7 @@
                                                 </p>
 
                                             </div>
+                                            <?php error_reporting(0); ?>
                                             <?php include 'student.php'; ?>
                                             <!-- <div class="error-message"></div> -->
                                         </div>
