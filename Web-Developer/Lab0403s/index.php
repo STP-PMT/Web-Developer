@@ -44,16 +44,47 @@
                                 <div id="contact" class="box-shadow-full">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="title-box-2">
+                                            <div class="title-box-2 pt-4 pt-md-0">
                                                 <h5 class="title-left">
                                                     ข้อมูลนักเรียน
                                                 </h5>
                                             </div>
+                                            <div class="more-info">
+                                                <p class="lead">
+
+                                                </p>
+
+                                            </div>
+                                            <div class="error-message"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="title-box-2">
+                                                <h5 class="title-left">
+                                                    เพิ่มข้อมูล
+                                                </h5>
+
+                                            </div>
                                             <div>
+                                                <table>
+                                                    <tr>
+                                                        <td id="1">
+                                                            <input type="radio" name="mode" value="add">Add
+                                                            <input type="radio" name="mode" value="delete">Delete
+                                                            <input type="radio" name="mode" value="show">Show
+                                                            <input type="radio" name="mode" value="edit">edit
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <input type="text" name="id" class="form-control" placeholder="รหัส">
+                                                            <div class="validate"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="f" placeholder="คำนำหน้า">
                                                             <div class="validate"></div>
                                                         </div>
                                                     </div>
@@ -90,28 +121,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="title-box-2 pt-4 pt-md-0">
-                                                <h5 class="title-left">
-                                                    เมนู
-                                                </h5>
-                                            </div>
-                                            <div class="more-info">
-                                                <p class="lead">
-
-                                                </p>
-                                                <table>
-                                                    <tr>
-                                                        <td id="1">
-                                                            <input type="radio" name="mode" value="add">Add<br>
-                                                            <input type="radio" name="mode" value="delete">Delete<br>
-                                                            <input type="radio" name="mode" value="show">Show<br>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="error-message"></div>
                                         </div>
                                     </div>
                                 </div>

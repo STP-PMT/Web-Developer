@@ -6,13 +6,15 @@ if (!isset($_SESSION['students'])) {
 class Student
 {
     public $id;
+    public $f;
     public $fullname;
     public $gpa;
     public $level;
     public $birthday;
-    public function __construct($id, $name, $gpa, $level, $birthday)
+    public function __construct($id, $f,$name, $gpa, $level, $birthday)
     {
         $this->id = $id;
+        $this->f = $f;
         $this->fullname = $name;
         $this->gpa = $gpa;
         $this->level = $level;
@@ -21,15 +23,15 @@ class Student
 }
 
 $id = $_POST['id'];
+$f = $_POST['f'];
 $fullname = $_POST['name'];
 $gpa = $_POST['gpa'];
 $mode = $_POST['mode'];
 $level = $_POST['level'];
 $birthday = $_POST['birthday'];
 
-
 if ($mode == "add") {
-    $student = new Student($id, $fullname, $gpa, $level, $birthday);
+    $student = new Student($id, $f,$fullname, $gpa, $level, $birthday);
     array_push($_SESSION['students'], $student);
 } else if ($mode == "delete") {
     $idx = 0;
@@ -40,10 +42,11 @@ if ($mode == "add") {
             $idx++;
         }
     }
-} elseif ($mode == "show") {
+} else {
 ?><table>
         <tr>
             <th>รหัส</th>
+            <th>คำนำหน้า</th>
             <th>ชื่อ-สกุล</th>
             <th>เกรด</th>
             <th>ชั้นปี</th>
@@ -54,6 +57,7 @@ if ($mode == "add") {
         ?>
             <tr>
                 <td><?=$s->id?></td>
+                <td><?=$s->f?></td>
                 <td><?=$s->fullname?></td>
                 <td><?=$s->gpa?></td>
                 <td><?=$s->level?></td>
