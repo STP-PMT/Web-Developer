@@ -34,7 +34,7 @@
             return "";
         }
     }
-    
+     $conn->close();
     // $stmt = $conn->prepare("select * from employees where email=? and password=?");
     // $stmt->bind_param("ss",$email,$pass);
     // $stmt->execute();
