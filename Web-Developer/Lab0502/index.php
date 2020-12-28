@@ -16,10 +16,11 @@
 
     if($result->num_rows>0){
         ?>
-        <style>table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
+        <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
         </style>
 
             <table>
