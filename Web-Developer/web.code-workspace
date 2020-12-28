@@ -34,9 +34,6 @@
 			"path": "Lab0403s"
 		},
 		{
-			"path": "TEST"
-		},
-		{
 			"path": "Lab0502"
 		},
 		{
@@ -47,6 +44,6 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "LabResume"
+		"liveServer.settings.multiRootWorkspaceName": "Lab0504"
 	}
 }
