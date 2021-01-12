@@ -9,7 +9,7 @@ $app = AppFactory::create();
 $app->setBasePath('/Web-Developer/Lab0601');
 
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
+    $response->getBody()->write("Hello,world!");
     return $response;
 });
 

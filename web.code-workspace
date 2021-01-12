@@ -16,9 +16,6 @@
 			"path": "Lab0302"
 		},
 		{
-			"path": "LabResume"
-		},
-		{
 			"path": "Lab0400"
 		},
 		{
@@ -31,9 +28,6 @@
 			"path": "Lab0403"
 		},
 		{
-			"path": "Lab0403s"
-		},
-		{
 			"path": "Lab0502"
 		},
 		{
@@ -44,6 +38,15 @@
 		},
 		{
 			"path": "Lab0601"
+		},
+		{
+			"path": "Lab0603"
+		},
+		{
+			"path": "Lab0604"
+		},
+		{
+			"path": "Lab0605"
 		}
 	],
 	"settings": {
