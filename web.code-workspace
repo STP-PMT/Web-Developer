@@ -47,9 +47,12 @@
 		},
 		{
 			"path": "Lab0605"
+		},
+		{
+			"path": "Member-book"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "Lab0504"
+		"liveServer.settings.multiRootWorkspaceName": "Member-book"
 	}
 }
