@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap-4.5.3-dist/bootstrap-4.5.3-dist/css/home.css">
-
+    <link rel="stylesheet" href="bootstrap-4.5.3-dist/bootstrap-4.5.3-dist/css/style.css">
 
 </head>
 
@@ -27,7 +27,9 @@
                             <h2>แก้ไข <b>Member_book</b></h2>
                         </div>
                         <div class="col-xs-6">
+                            <a href="index.php" class="btn btn-danger" ><i class="material-icons">&#xE15C;</i> <span>ออกจากระบบ</span></a>
                             <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>เพิ่มสมาชิก</span></a>
+
                             <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a> -->
                         </div>
                     </div>
@@ -89,7 +91,7 @@
                             <label>facebook_url</label>
                             <input type="text" name='fb' class="form-control" required>
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -109,7 +111,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                    <div class="form-group">
+                        <div class="form-group">
                             <label>ใส่ ID ของสมาชิกที่ต้องการแก้ไข</label>
                             <input type="int" name='ID' class="form-control" required>
                         </div>
@@ -136,7 +138,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" >
+                        <input type="submit" class="btn btn-info">
                     </div>
                 </form>
             </div>
