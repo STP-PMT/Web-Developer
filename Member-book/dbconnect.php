@@ -60,7 +60,7 @@ class dbconnect
                     <td><?= $row["nickName"] ?></td>
                     <td><?= $row["phone"] ?></td>
                     <td><?= $row["facebook_url"] ?></td>
-                    <td><button id='<?php $row["ID"] ?>'></button></td>
+                    <td><button><a href="#editEmployeeModal" class="edit" name='ID' id='<?= $row["ID"] ?>' data-toggle="modal">แก้ไข</a></button></td>
                     <td><button id='<?php $row["ID"] ?>'><a href="delete.php? id=<?= $row["ID"] ?>">ลบ</a></button></td>
                     <!-- <form action="insert.php" method="POST">
                         <td>
@@ -75,8 +75,20 @@ class dbconnect
         }
     }
 
-    public function update($fname, $lname, $nname, $phone, $fb)
+    public function update($fname, $lname, $nname, $phone, $fb,$ID)
     {
+        
+        $stmt = $this->conn->prepare('insert into member_book(fristName, lastName, nickName, phone, facebook_url) VALUES (?,?,?,?,?) where ID=?');
+        $stmt->bind_param('sssisi', $fname, $lname, $nname, $phone, $fb,$ID);
+        $stmt->execute();
+        $res = $stmt->affected_rows;
+        echo $res . '';
+        if ($res <= 0) {
+            echo "<script>alert('Insert FAIL');</script>";
+        } else {
+            header("Location: edit.php");
+            echo "<script>alert('Insert Succes');</script>";
+        }
     }
     public function delete($ID)
     {
@@ -84,11 +96,13 @@ class dbconnect
         $stmt->bind_param('i', $ID);
         $stmt->execute();
         $res = $stmt->affected_rows;
-        echo $res . '';
         if ($res <= 0) {
             echo "<script>alert('Insert FAIL');</script>";
+            header("Location: edit.php");
         } else {
             echo "<script>alert('Insert Succes');</script>";
+            header("Location: edit.php");
+            
         }
     }
 
