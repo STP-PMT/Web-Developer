@@ -36,7 +36,7 @@ class dbconnect
             header("Location: edit.php");
         } else {
             echo "<script>alert('ชื่อผู้ใช้หรือรหัสผ่านผิด');</script>";
-            include 'index.html';
+            header("Location: index.html");
             $this->console_log("Login Faile");
         }
     }
@@ -60,12 +60,14 @@ class dbconnect
                     <td><?= $row["nickName"] ?></td>
                     <td><?= $row["phone"] ?></td>
                     <td><?= $row["facebook_url"] ?></td>
-                    <form action="insert.php" method="POST">
+                    <td><button id='<?php $row["ID"] ?>'></button></td>
+                    <td><button id='<?php $row["ID"] ?>'><a href="delete.php? id=<?= $row["ID"] ?>">ลบ</a></button></td>
+                    <!-- <form action="insert.php" method="POST">
                         <td>
                             <a href="#editEmployeeModal" class="edit" name='ID' id='<?php $row["ID"] ?>' data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" name='ID' id='<?php $row["ID"] ?>' data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
-                    </form>
+                    </form> -->
 
                 </tr>
 <?php
@@ -100,6 +102,7 @@ class dbconnect
         if ($res <= 0) {
             echo "<script>alert('Insert FAIL');</script>";
         } else {
+            header("Location: edit.php");
             echo "<script>alert('Insert Succes');</script>";
         }
     }
