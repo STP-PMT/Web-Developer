@@ -24,11 +24,12 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-xs-6">
-                            <h2>แก้ไข <b>Member_book</b></h2>
+                            <h2>แก้ไขข้อมูลสมาชิก</h2>
                         </div>
                         <div class="col-xs-6">
                             <a href="index.php" class="btn btn-danger" ><i class="material-icons">&#xE15C;</i> <span>ออกจากระบบ</span></a>
                             <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>เพิ่มสมาชิก</span></a>
+                            <a href="#editEmployeeModal" class="btn btn-warning" data-toggle="modal" ><i class="material-icons">&#xf040;</i> <span>แก้ไข</span></a>
 
                             <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a> -->
                         </div>
@@ -45,7 +46,6 @@
                             <th>ชื่อเล่น</th>
                             <th>เบอร์โทร</th>
                             <th>facebook_url</th>
-                            <th>แก้ไข</th>
                             <th>ลบ</th>
                         </tr>
                     </thead>
