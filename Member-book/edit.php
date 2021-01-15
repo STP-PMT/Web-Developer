@@ -106,6 +106,10 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
+                    <div class="form-group">
+                            <label>ใส่ ID ของสมาชิกที่ต้องการแก้ไข</label>
+                            <input type="int" name='ID' class="form-control" required>
+                        </div>
                         <div class="form-group">
                             <label>ชื่อ</label>
                             <input type="text" name='name' class="form-control" required>
@@ -150,7 +154,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger"value="delete">
+                        <input type="submit" class="btn btn-danger" value="delete">
                     </div>
                 </form>
             </div>

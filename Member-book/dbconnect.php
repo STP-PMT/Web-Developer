@@ -60,7 +60,7 @@ class dbconnect
                     <td><?= $row["nickName"] ?></td>
                     <td><?= $row["phone"] ?></td>
                     <td><?= $row["facebook_url"] ?></td>
-                    <td><button><a href="#editEmployeeModal" class="edit" name='ID' id='<?= $row["ID"] ?>' data-toggle="modal">แก้ไข</a></button></td>
+                    <td><button id='<?php $row["ID"] ?>'><a data-toggle="modal" href="#editEmployeeModal">แก้ไข</a></button></td>
                     <td><button id='<?php $row["ID"] ?>'><a href="delete.php? id=<?= $row["ID"] ?>">ลบ</a></button></td>
                     <!-- <form action="insert.php" method="POST">
                         <td>
@@ -78,8 +78,8 @@ class dbconnect
     public function update($fname, $lname, $nname, $phone, $fb,$ID)
     {
         
-        $stmt = $this->conn->prepare('insert into member_book(fristName, lastName, nickName, phone, facebook_url) VALUES (?,?,?,?,?) where ID=?');
-        $stmt->bind_param('sssisi', $fname, $lname, $nname, $phone, $fb,$ID);
+        $stmt = $this->conn->prepare('update member_book SET fristName=?,lastName=?,nickName=?,phone=?,facebook_url=? WHERE ID=?');
+        $stmt->bind_param('sssisi',$fname, $lname, $nname, $phone, $fb, $ID);
         $stmt->execute();
         $res = $stmt->affected_rows;
         echo $res . '';
