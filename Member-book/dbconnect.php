@@ -54,15 +54,19 @@ class dbconnect
                 <tr>
                     <td>
                     </td>
+                    <td><?= $row["ID"] ?></td>
                     <td><?= $row["fristName"] ?></td>
                     <td><?= $row["lastName"] ?></td>
                     <td><?= $row["nickName"] ?></td>
                     <td><?= $row["phone"] ?></td>
                     <td><?= $row["facebook_url"] ?></td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
+                    <form action="insert.php" method="POST">
+                        <td>
+                            <a href="#editEmployeeModal" class="edit" name='ID' id='<?php $row["ID"] ?>' data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" name='ID' id='<?php $row["ID"] ?>' data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        </td>
+                    </form>
+
                 </tr>
 <?php
             }
@@ -71,22 +75,33 @@ class dbconnect
 
     public function update($fname, $lname, $nname, $phone, $fb)
     {
-        
+    }
+    public function delete($ID)
+    {
+        $stmt = $this->conn->prepare('delete FROM member_book WHERE ID=?');
+        $stmt->bind_param('i', $ID);
+        $stmt->execute();
+        $res = $stmt->affected_rows;
+        echo $res . '';
+        if ($res <= 0) {
+            echo "<script>alert('Insert FAIL');</script>";
+        } else {
+            echo "<script>alert('Insert Succes');</script>";
+        }
     }
 
-    public function insert($fname, $lname, $nname, $phone, $fb){
-        $stmt = $this->conn->prepare('insert into member_book(fristName, lastName, nickName, phone, facebook_url) VALUES (?,?,?,?,?,)');
+    public function insert($fname, $lname, $nname, $phone, $fb)
+    {
+        $stmt = $this->conn->prepare('insert into member_book(fristName, lastName, nickName, phone, facebook_url) VALUES (?,?,?,?,?)');
         $stmt->bind_param('sssis', $fname, $lname, $nname, $phone, $fb);
         $stmt->execute();
-
-        $res=$stmt->affected_rows;
-            if($res==0){
-                echo "<script>alert('Insert FAIL');</script>";
-               
-            }else{
-                echo "<script>alert('Insert Succes');</script>";
-                
-            }
+        $res = $stmt->affected_rows;
+        echo $res . '';
+        if ($res <= 0) {
+            echo "<script>alert('Insert FAIL');</script>";
+        } else {
+            echo "<script>alert('Insert Succes');</script>";
+        }
     }
 
     public function console_log($output, $with_script_tags = true)

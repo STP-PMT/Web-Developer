@@ -37,6 +37,7 @@
                         <tr>
                             <th>
                             </th>
+                            <th>ID</th>
                             <th>ชื่อ</th>
                             <th>นามสกุล</th>
                             <th>ชื่อเล่น</th>
@@ -45,11 +46,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <div><?php include 'dbconnect.php';$db = new dbconnect();
+                        <div><?php include 'dbconnect.php';
+                                $db = new dbconnect();
                                 $db->db_start();
                                 $db->show();
                                 $db->conn->close();
-                        ?></div>
+                                ?></div>
                     </tbody>
                 </table>
             </div>
@@ -67,23 +69,23 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>ชื่อ</label>
-                            <input type="text" name ='name' class="form-control" required>
+                            <input type="text" name='name' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>นามสกุล</label>
-                            <input type="text" name ='lname' class="form-control" required>
+                            <input type="text" name='lname' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>ชื่อเล่น</label>
-                            <input type="text" name ='nname' class="form-control" required>
+                            <input type="text" name='nname' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>เบอร์โทร</label>
-                            <input type="int" name ='phone'class="form-control" required>
+                            <input type="int" name='phone' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>facebook_url</label>
-                            <input type="text" name ='fb'class="form-control" required>
+                            <input type="text" name='fb' class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -106,23 +108,23 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>ชื่อ</label>
-                            <input type="text" name ='name' class="form-control" required>
+                            <input type="text" name='name' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>นามสกุล</label>
-                            <input type="text" name ='lname' class="form-control" required>
+                            <input type="text" name='lname' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>ชื่อเล่น</label>
-                            <input type="text" name ='nname' class="form-control" required>
+                            <input type="text" name='nname' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>เบอร์โทร</label>
-                            <input type="int" name ='phone'class="form-control" required>
+                            <input type="int" name='phone' class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>facebook_url</label>
-                            <input type="text" name ='fb'class="form-control" required>
+                            <input type="text" name='fb' class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -137,7 +139,7 @@
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form action="insert.php" method="POST">
                     <div class="modal-header">
                         <h4 class="modal-title">Delete Employee</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -148,7 +150,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger" value="Delete">
+                        <input type="submit" class="btn btn-danger"value="delete">
                     </div>
                 </form>
             </div>
