@@ -5,7 +5,8 @@ $db->db_start();
 <html>
 
 <body>
-    <?php $db->show(); ?>
+    <?php   $hashed=password_hash("1234",PASSWORD_DEFAULT);
+    echo $hashed; ?>
 </body>
 
 </html>
