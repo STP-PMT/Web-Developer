@@ -43,6 +43,8 @@
                             <th>ชื่อเล่น</th>
                             <th>เบอร์โทร</th>
                             <th>facebook_url</th>
+                            <th>แก้ไข</th>
+                            <th>ลบ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,6 +89,7 @@
                             <label>facebook_url</label>
                             <input type="text" name='fb' class="form-control" required>
                         </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
