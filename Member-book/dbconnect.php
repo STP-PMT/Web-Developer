@@ -135,9 +135,8 @@ class dbconnect
         $stmt->bind_param('sssss', $fname, $lname, $nname, $phone, $fb);
         $stmt->execute();
         $res = $stmt->affected_rows;
-        echo $res . '';
         if ($res <= 0) {
-            echo "<script>alert('Insert FAIL');</script>";
+            header('Location: edit.php');
         } else {
             header("Location: edit.php");
             echo "<script>alert('Insert Succes');</script>";
