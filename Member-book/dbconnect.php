@@ -59,7 +59,7 @@ class dbconnect
                     <td><?= $row["nickName"] ?></td>
                     <td><?= $row["phone"] ?></td>
                     <td><?= $row["facebook_url"] ?></td>
-                    <td><button class="btn btn-danger"  id='<?php $row["ID"] ?>'><a href="delete.php? id=<?= $row["ID"] ?>"><span style="color: aliceblue;">ลบ</span></a></button></td>
+                    <td><button class="btn btn-danger"><a href="delete.php? id=<?= $row["ID"] ?>"><span style="color: aliceblue;">ลบ</span></a></button></td>
                     <!-- <form action="insert.php" method="POST">
                         <td>
                             <a href="#editEmployeeModal" class="edit" name='ID' id='<?php $row["ID"] ?>' data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
