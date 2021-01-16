@@ -102,7 +102,7 @@ class dbconnect
     {
         
         $stmt = $this->conn->prepare('update member_book SET fristName=?,lastName=?,nickName=?,phone=?,facebook_url=? WHERE ID=?');
-        $stmt->bind_param('sssisi',$fname, $lname, $nname, $phone, $fb, $ID);
+        $stmt->bind_param('sssssi',$fname, $lname, $nname, $phone, $fb, $ID);
         $stmt->execute();
         $res = $stmt->affected_rows;
         if ($res <= 0) {
@@ -132,7 +132,7 @@ class dbconnect
     public function insert($fname, $lname, $nname, $phone, $fb)
     {
         $stmt = $this->conn->prepare('insert into member_book(fristName, lastName, nickName, phone, facebook_url) VALUES (?,?,?,?,?)');
-        $stmt->bind_param('sssis', $fname, $lname, $nname, $phone, $fb);
+        $stmt->bind_param('sssss', $fname, $lname, $nname, $phone, $fb);
         $stmt->execute();
         $res = $stmt->affected_rows;
         echo $res . '';
