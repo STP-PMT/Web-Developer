@@ -36,11 +36,10 @@ if ($stmt->num_rows >= 0) {
                         <form action="update.php" method="POST">
                             <div class="modal-header">
                                 <h4 class="modal-title">แก้ไขข้อมูลสมาชิก</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input type="hidden" name='ID' class="form-control" required  value="<?= $row["ID"] ?>">
+                                    <input type="hidden" name='ID' class="form-control" required value="<?= $row["ID"] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>ชื่อ</label>
@@ -63,8 +62,8 @@ if ($stmt->num_rows >= 0) {
                                     <input type="text" name='fb' class="form-control" required value="<?= $row["facebook_url"] ?>">
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                    <input type="submit" class="btn btn-info">
+                                    <a href="edit.php" class="btn btn-danger"><i class="material-icons"></i> <span>ยกเลิก</span></a>
+                                    <input type="submit" class="btn btn-info" value="บันทึก">
                                 </div>
                         </form>
                     </div>

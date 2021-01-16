@@ -106,6 +106,7 @@ class dbconnect
         $stmt->execute();
         $res = $stmt->affected_rows;
         if ($res <= 0) {
+            header("Location: updateUI.php");
             echo "<script>alert('Insert FAIL');</script>";
         } else {
             header("Location: edit.php");
