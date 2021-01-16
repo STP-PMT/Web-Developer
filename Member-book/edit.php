@@ -105,7 +105,7 @@
     <div id="editEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="update.php" method="POST">
+                <form action="updateUI.php" method="POST">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Employee</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -115,27 +115,6 @@
                             <label>ใส่ ID ของสมาชิกที่ต้องการแก้ไข</label>
                             <input type="int" name='ID' class="form-control" required>
                         </div>
-                        <div class="form-group">
-                            <label>ชื่อ</label>
-                            <input type="text" name='name' class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>นามสกุล</label>
-                            <input type="text" name='lname' class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>ชื่อเล่น</label>
-                            <input type="text" name='nname' class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>เบอร์โทร</label>
-                            <input type="int" name='phone' class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>facebook_url</label>
-                            <input type="text" name='fb' class="form-control" required>
-                        </div>
-                    </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                         <input type="submit" class="btn btn-info">

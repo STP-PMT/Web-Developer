@@ -105,7 +105,6 @@ class dbconnect
         $stmt->bind_param('sssisi',$fname, $lname, $nname, $phone, $fb, $ID);
         $stmt->execute();
         $res = $stmt->affected_rows;
-        echo $res . '';
         if ($res <= 0) {
             echo "<script>alert('Insert FAIL');</script>";
         } else {
