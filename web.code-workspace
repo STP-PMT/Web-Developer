@@ -50,6 +50,9 @@
 		},
 		{
 			"path": "Member-book"
+		},
+		{
+			"path": "web-service"
 		}
 	],
 	"settings": {
