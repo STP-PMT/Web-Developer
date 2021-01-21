@@ -5,13 +5,11 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
 
+
 $app = AppFactory::create();
 $app->setBasePath('/Web-Developer/web-service');
-
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
+require __DIR__ . '/api/connect.php';
+require __DIR__ .'/api/insert.php';
 
 $app->run();
 ?>
