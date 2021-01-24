@@ -18,8 +18,27 @@ $app->get('/products/test', function (Request $request, Response $response, $arg
 });
 
 $app->get('/products/insert', function (Request $request, Response $response, $args) {
+    $body = $request->getBody();
+    $bodyArray = json_decode($body, true);
 
-    $response->getBody()->write("Produts insert");
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('insert into products (productCode,productName,productLine,productScale,productVendor,productDescription,quantityInStock,buyPrice,MSRP) values(?,?,?,?,?,?,?,?,?)');
+    $stmt->bind_param(
+        'ssssssidd',
+        $bodyArray['productCode'],
+        $bodyArray['productName'],
+        $bodyArray['productLine'],
+        $bodyArray['productScale'],
+        $bodyArray['productVendor'],
+        $bodyArray['productDescription'],
+        $bodyArray['quantityInStock'],
+        $bodyArray['buyPrice'],
+        $bodyArray['MSRP']
+    );
+
+    $stmt->execute();
+    $result = $stmt->affected_rows;
+    $response->getBody()->write($result.'');
     return $response;
 });
 
