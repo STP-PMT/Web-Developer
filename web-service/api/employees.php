@@ -25,7 +25,7 @@ $app->post('/employees', function (Request $request, Response $response, $args) 
         $json = json_encode($data);
         $response->getBody()->write($json);
     }else{
-        echo 'Login Fail';
+        $response->getBody()->write('Login fail!');
     }
     
     return $response->withHeader('content-Type', 'application/json');

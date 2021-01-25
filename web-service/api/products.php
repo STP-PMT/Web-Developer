@@ -57,8 +57,6 @@ $app->post('/products/{update_id}', function (Request $request, Response $respon
 // delete
 $app->get('/products/{delete_id}', function (Request $request, Response $response, $args) {
     $delete_id = $args['delete_id'];
-    $body = $request->getBody();
-    $bodyArray = json_decode($body, true);
 
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare('delete FROM products WHERE productCode=?');
