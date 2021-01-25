@@ -2,22 +2,8 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-
-$app->get('/products/test', function (Request $request, Response $response, $args) {
-    $condb = $GLOBALS['conn'];
-    $stmt = $condb->prepare('select * from products');
-    $stmt->execute();
-    $result =  $stmt->get_result();
-    $data = array();
-    while($row = $result->fetch_assoc()){
-        array_push($data,$row);
-    }
-    $json = json_encode($data);
-    $response->getBody()->write($json);
-    return $response;
-});
-
-$app->get('/products/insert', function (Request $request, Response $response, $args) {
+// insert
+$app->post('/products', function (Request $request, Response $response, $args) {
     $body = $request->getBody();
     $bodyArray = json_decode($body, true);
 
@@ -41,21 +27,94 @@ $app->get('/products/insert', function (Request $request, Response $response, $a
     $response->getBody()->write($result.'');
     return $response;
 });
+// update
+$app->post('/products/{update_id}', function (Request $request, Response $response, $args) {
+    $update_id =$args['update_id'];
+    $body = $request->getBody();
+    $bodyArray = json_decode($body, true);
 
-$app->get('/products/update', function (Request $request, Response $response, $args) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('update products SET productCode=?,productName=?,productLine=?,productScale=?,productVendor=?,productDescription=?,quantityInStock=?,buyPrice=?,MSRP=? WHERE productCode=?');
+    $stmt->bind_param(
+        'ssssssidds',
+        $bodyArray['productCode'],
+        $bodyArray['productName'],
+        $bodyArray['productLine'],
+        $bodyArray['productScale'],
+        $bodyArray['productVendor'],
+        $bodyArray['productDescription'],
+        $bodyArray['quantityInStock'],
+        $bodyArray['buyPrice'],
+        $bodyArray['MSRP'],
+        $update_id
+    );
 
-    $response->getBody()->write("Products update");
+    $stmt->execute();
+    $result = $stmt->affected_rows;
+    $response->getBody()->write($result.'');
     return $response;
 });
+// delete
+$app->get('/products/{delete_id}', function (Request $request, Response $response, $args) {
+    $delete_id = $args['delete_id'];
+    $body = $request->getBody();
+    $bodyArray = json_decode($body, true);
 
-$app->get('/products/delete', function (Request $request, Response $response, $args) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('delete FROM products WHERE productCode=?');
+    $stmt->bind_param(
+        's',
+        $delete_id
+    );
 
-    $response->getBody()->write("Products delete");
+    $stmt->execute();
+    $result = $stmt->affected_rows;
+    $response->getBody()->write($result.'');
     return $response;
 });
+// seacrh
+$app->get('/products', function (Request $request, Response $response, $args) {
+    $condb = $GLOBALS['conn'];
+    $stmt = $condb->prepare('select * from products');
+    $stmt->execute();
+    $result =  $stmt->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        array_push($data,$row);
+    }
+    $json = json_encode($data);
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
+});
 
-$app->get('/products/seacrh', function (Request $request, Response $response, $args) {
-
-    $response->getBody()->write("Products seacrh");
-    return $response;
+$app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Response $response, $args) {
+    $field=$args['seacrh_field'];
+    $key =$args['keyword'];
+    if($field == 'productCode'){
+        $condb = $GLOBALS['conn'];
+        $stmt = $condb->prepare('select * from products where productCode=?');
+        $stmt->bind_param('s',$key);
+        $stmt->execute();
+        $result =  $stmt->get_result();
+        $data = array();
+        while($row = $result->fetch_assoc()){
+            array_push($data,$row);
+        }
+        $json = json_encode($data);
+        $response->getBody()->write($json);
+    }else if($field =='productName'){
+        $condb = $GLOBALS['conn'];
+        $stmt = $condb->prepare('select * from products where productName=?');
+        $stmt->bind_param('s',$key);
+        $stmt->execute();
+        $result =  $stmt->get_result();
+        $data = array();
+        while($row = $result->fetch_assoc()){
+            array_push($data,$row);
+        }
+        $json = json_encode($data);
+        $response->getBody()->write($json);
+    }
+   
+    return $response->withHeader('content-Type', 'application/json');
 });
