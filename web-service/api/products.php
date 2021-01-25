@@ -25,10 +25,7 @@ $app->post('/products', function (Request $request, Response $response, $args) {
 
     $stmt->execute();
     $result = $stmt->affected_rows;
-    if ($result >= 0) {
-        $json = json_encode('insert ' . $result . ' row');
-    }
-    $response->getBody()->write($json);
+    $response->getBody()->write($result . '');
     return $response;
 });
 
@@ -56,10 +53,7 @@ $app->post('/products/{update_id}', function (Request $request, Response $respon
 
     $stmt->execute();
     $result = $stmt->affected_rows;
-    if ($result >= 0) {
-        $json = json_encode('update ' . $result . ' row');
-    }
-    $response->getBody()->write($json);
+    $response->getBody()->write($result.'');
     return $response;
 });
 
@@ -120,6 +114,5 @@ $app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Resp
     }
     $json = json_encode($data);
     $response->getBody()->write($json);
-
     return $response->withHeader('content-Type', 'application/json');
 });
