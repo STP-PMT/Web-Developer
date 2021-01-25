@@ -5,4 +5,3 @@
     $dbname ='stu62011212109';
 
     $conn = new mysqli($servername,$username,$password,$dbname);
-?>
