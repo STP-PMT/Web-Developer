@@ -93,6 +93,8 @@ $app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Resp
         $stmt = $condb->prepare('select * from products where productCode=?');
     } else if ($field == 'productName') {
         $stmt = $condb->prepare('select * from products where productName=?');
+    }else{
+        die('Not found '.$field);
     }
 
     $stmt->bind_param('s', $key);

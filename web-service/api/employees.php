@@ -25,7 +25,7 @@ $app->post('/employees', function (Request $request, Response $response, $args) 
         $json = json_encode($data);
         $response->getBody()->write($json);
     } else {
-        $response->getBody()->write('Login fail!');
+        die('Login fail!');
     }
 
     return $response->withHeader('content-Type', 'application/json');
@@ -48,10 +48,9 @@ $app->post('/employees/new', function (Request $request, Response $response, $ar
         $stmt = $conn->prepare("update employees set password=? where employeeNumber=?");
         $stmt->bind_param("ss", $hash, $row['employeeNumber']);
         $stmt->execute();
-        $response->getBody()->write('update done');
+        $response->getBody()->write('Update password done');
     } else {
-        $response->getBody()->write($bodyArray['password']);
+        die('Update password fail!');
     }
-
-    return $response->withHeader('content-Type', 'application/json');
+    return $response;
 });
