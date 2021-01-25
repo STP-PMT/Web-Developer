@@ -53,6 +53,9 @@
 		},
 		{
 			"path": "web-service"
+		},
+		{
+			"path": "password_hash"
 		}
 	],
 	"settings": {
