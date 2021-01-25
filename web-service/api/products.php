@@ -2,6 +2,7 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+
 // insert
 $app->post('/products', function (Request $request, Response $response, $args) {
     $body = $request->getBody();
@@ -24,9 +25,13 @@ $app->post('/products', function (Request $request, Response $response, $args) {
 
     $stmt->execute();
     $result = $stmt->affected_rows;
-    $response->getBody()->write($result . '');
+    if ($result >= 0) {
+        $json = json_encode('insert ' . $result . ' row');
+    }
+    $response->getBody()->write($json);
     return $response;
 });
+
 // update
 $app->post('/products/{update_id}', function (Request $request, Response $response, $args) {
     $update_id = $args['update_id'];
@@ -51,9 +56,13 @@ $app->post('/products/{update_id}', function (Request $request, Response $respon
 
     $stmt->execute();
     $result = $stmt->affected_rows;
-    $response->getBody()->write($result . '');
+    if ($result >= 0) {
+        $json = json_encode('update ' . $result . ' row');
+    }
+    $response->getBody()->write($json);
     return $response;
 });
+
 // delete
 $app->get('/products/{delete_id}', function (Request $request, Response $response, $args) {
     $delete_id = $args['delete_id'];
@@ -67,9 +76,13 @@ $app->get('/products/{delete_id}', function (Request $request, Response $respons
 
     $stmt->execute();
     $result = $stmt->affected_rows;
-    $response->getBody()->write($result . '');
+    if ($result >= 0) {
+        $json = json_encode('deleted ' . $result . ' row');
+    }
+    $response->getBody()->write($json);
     return $response;
 });
+
 // seacrh
 $app->get('/products', function (Request $request, Response $response, $args) {
     $condb = $GLOBALS['conn'];
@@ -89,12 +102,13 @@ $app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Resp
     $field = $args['seacrh_field'];
     $key = $args['keyword'];
     $condb = $GLOBALS['conn'];
+
     if ($field == 'productCode') {
         $stmt = $condb->prepare('select * from products where productCode=?');
     } else if ($field == 'productName') {
         $stmt = $condb->prepare('select * from products where productName=?');
-    }else{
-        die('Not found '.$field);
+    } else {
+        die('Not found ' . $field);
     }
 
     $stmt->bind_param('s', $key);

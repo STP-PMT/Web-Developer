@@ -11,23 +11,26 @@ $app->post('/employees', function (Request $request, Response $response, $args) 
     $stmt->bind_param("s", $bodyArray['email']);
     $stmt->execute();
     $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
 
-    if (password_verify($bodyArray['password'], $row['password'])) {
-        $stmt = $conn->prepare("select * from employees where email=?");
-        $stmt->bind_param("s", $bodyArray['email']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = array();
-        while ($row = $result->fetch_assoc()) {
-            array_push($data, $row);
+    if ($stmt->affected_rows > 0) {
+        $row = $result->fetch_assoc();
+        if (password_verify($bodyArray['password'], $row['password'])) {
+            $stmt = $conn->prepare("select * from employees where email=?");
+            $stmt->bind_param("s", $bodyArray['email']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                array_push($data, $row);
+            }
+            $json = json_encode($data);
+        } else {
+            $json = json_encode('Login fail!');
         }
-        $json = json_encode($data);
-        $response->getBody()->write($json);
     } else {
-        die('Login fail!');
+        $json = json_encode('Login fail!');
     }
-
+    $response->getBody()->write($json);
     return $response->withHeader('content-Type', 'application/json');
 });
 
@@ -40,17 +43,21 @@ $app->post('/employees/new', function (Request $request, Response $response, $ar
     $stmt->bind_param("s", $bodyArray['email']);
     $stmt->execute();
     $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    if (password_verify($bodyArray['password'], $row['password'])) {
-        $conn = $GLOBALS['conn'];
-        $hash = password_hash($bodyArray['newPassword'], PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("update employees set password=? where employeeNumber=?");
-        $stmt->bind_param("ss", $hash, $row['employeeNumber']);
-        $stmt->execute();
-        $response->getBody()->write('Update password done');
+    if ($stmt->affected_rows > 0) {
+        $row = $result->fetch_assoc();
+        if (password_verify($bodyArray['password'], $row['password'])) {
+            $conn = $GLOBALS['conn'];
+            $hash = password_hash($bodyArray['newPassword'], PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("update employees set password=? where employeeNumber=?");
+            $stmt->bind_param("ss", $hash, $row['employeeNumber']);
+            $stmt->execute();
+            $json =  json_encode('Update password done');
+        } else {
+            $json =  json_encode('Update password fail!');
+        }
     } else {
-        die('Update password fail!');
+        $json =  json_encode('Update password fail!');
     }
-    return $response;
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
 });
