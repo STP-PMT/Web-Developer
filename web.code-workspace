@@ -56,6 +56,9 @@
 		},
 		{
 			"path": "password_hash"
+		},
+		{
+			"path": "demo-web"
 		}
 	],
 	"settings": {
