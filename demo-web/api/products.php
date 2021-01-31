@@ -4,6 +4,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\RequestInterface as Request;
 
 // seacrh
+$app->get('/', function (Request $request, Response $response, $args) {
+    include 'login.html';
+    return $response;
+});
+
 $app->get('/products', function (Request $request, Response $response, $args) {
     $condb = $GLOBALS['conn'];
     $stmt = $condb->prepare('select * from products');
@@ -15,9 +20,8 @@ $app->get('/products', function (Request $request, Response $response, $args) {
     }
     $json = json_encode($data);
     $response->getBody()->write($json);
-    // return $this->renderer->render($response, "index.php");
-    // return $response->withHeader('content-Type', 'application/json');
-
+    // return $this->renderer->render($response, "login.html");
+    return $response->withHeader('content-Type', 'application/json');
 });
 
 $app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Response $response, $args) {

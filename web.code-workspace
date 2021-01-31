@@ -59,6 +59,9 @@
 		},
 		{
 			"path": "demo-web"
+		},
+		{
+			"path": "web-oop"
 		}
 	],
 	"settings": {

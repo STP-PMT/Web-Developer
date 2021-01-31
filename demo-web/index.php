@@ -1,3 +1,4 @@
+
 <?php
 use Slim\Factory\AppFactory;
 
@@ -7,7 +8,6 @@ $app = AppFactory::create();
 $app->setBasePath('/Web-Developer/demo-web');
 require __DIR__ . '/api/connect.php';
 require __DIR__ . '/api/products.php';
-
 
 $app->run();
 ?>
