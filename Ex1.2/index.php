@@ -36,18 +36,17 @@
                             <div class="form-group ">
                                 <div class="dropdown">
                                     <label for="">เลือกสถานที่</label>
-                                    <select class="form-control" name="pl">
-                                        <option value="1">วิทยาการสารสนเทศ</option>
-                                        <option value="2">คณะพยาบาลศาสตร์</option>
-                                        <option value="3">คณะวิทยาศาสตร์</option>
-                                        <option value="4">คณะนิติศาสตร์</option>
-                                        <option value="5">กองบริการการศึกษา</option>
-                                    </select>
+                                    <?php include 'connect.php';
+                                    $con = new dbconnect();
+                                    $con->db_start();
+                                    $con->place();
+                                    ?>
+                                   
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">เลือกวันรายงาน</label>
-                                <input type="date" name="date" class="form-control" >
+                                <input type="date" name="date" class="form-control">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success  btn-lg btn-block">แสดงรายงาน</button>
