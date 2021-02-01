@@ -1,3 +1,10 @@
+<?php
+include 'connect.php';
+$con = new dbconnect();
+$con->db_start();
+// error_reporting(0);
+?>
+
 <html>
 
 <head>
@@ -47,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">เลือกวันรายงาน</label>
-                                <input type="date" name="date" class="form-control" >
+                                <input type="date" name="date" class="form-control">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success  btn-lg btn-block">แสดงรายงาน</button>
@@ -58,7 +65,8 @@
                 <br> <br> <br>
             </div>
         </div>
-    </div>
+    </div><?php
+    $con->show($_POST['pl'],$_POST['date']);?>
     </script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/jquery-3.5.1.min.js"></script>
