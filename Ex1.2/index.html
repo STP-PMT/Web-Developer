@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+</head>
+<style>
+    @font-face {
+        font-family: myFirstFont;
+        src: url(font/Kanit/Kanit-Regular.ttf);
+    }
+
+    * {
+        font-family: myFirstFont;
+    }
+</style>
+
+<body>
+    <div class="container" style="width: 600px; padding: 30px">
+        <div class="row text-center">
+            <div class="col-6">
+                <a href="">เช็คอินสถานที่</a>
+            </div>
+            <div class="col-6">
+                <a href="">ตรวจสอบข้อมูล</a>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 600px;padding: 30px">
+        <div class="card">
+            <center>
+                <div class="container" style="width: 300px">
+                    <br>
+                    <div class="form-group ">
+                        <div class="dropdown">
+                            <label for="">เลือกสถานที่</label>
+                            <select class="form-control">
+                                <option>วิทยาการสารสนเทศ</option>
+                                <option>คณะพยาบาลศาสตร์</option>
+                                <option>คณะวิทยาศาสตร์</option>
+                                <option>คณะนิติศาสตร์</option>
+                                <option>กองบริการการศึกษา</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">เลือกวันรายงาน</label>
+                        <input type="date" id="datepicker" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success  btn-lg btn-block">แสดงรายงาน</button>
+                    </div>
+                </div>
+            </center>
+            <br> <br> <br>
+        </div>
+    </div>
+    <script>
+        $('#datepicker').datepicker();
+    </script>
+    <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+</body>
+
+</html>
