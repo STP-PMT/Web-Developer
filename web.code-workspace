@@ -62,6 +62,9 @@
 		},
 		{
 			"path": "web-oop"
+		},
+		{
+			"path": "web-thaichana"
 		}
 	],
 	"settings": {
