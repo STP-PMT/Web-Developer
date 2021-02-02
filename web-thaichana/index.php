@@ -50,7 +50,21 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="หมายเลขโทรศัพท์" name="phoneno"></input><br> <input type="submit" value="เช็คอิน" class="btn btn-success btn-block"></input><br><br>
+                        <input type="text" class="form-control" placeholder="หมายเลขโทรศัพท์" name="phoneno"></input><br> <input type="submit" name="checkin" value="เช็คอิน" class="btn btn-success btn-block"></input><br><br>
+                        <?php
+                        error_reporting(0);
+                        session_start();
+                        if ($_SESSION['msg'] == '1') {
+                            echo '<label for=""><span class="text-success">
+                                <p>*เช็คอินเรียบร้อย</p>
+                            </span></label>';
+                        } else if ($_SESSION['msg'] == '2') {
+                            echo '<label for=""><span class="text-danger">
+                                <p>*หมายเลขโทรศัพท์ไม่ถูกต้อง</p>
+                            </span></label>';
+                        }
+                        unset($_SESSION['msg']);
+                        ?>
                         <label for=""><span class="text-muted">
                                 <p>หมายเหตุ - ระบบต้องบันทึกการเช็คอินเป็นวันเวลาปัจจุบัน และจำลองการเช็คเอ๊าในอีก 1 ชม.15 นาที</p>
                             </span>
