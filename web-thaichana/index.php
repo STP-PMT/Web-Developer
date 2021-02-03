@@ -30,7 +30,7 @@
     </div>
 
     <div class="container border  rounded" style="width: 500px;  margin-top: 50px; text-align: center;">
-        <form action="checkin.php" method="get">
+        <form action="server.php" method="get">
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-6">
@@ -38,9 +38,12 @@
                     <div class="form-group">
                         <label>เลือกสถานที่ จำลองการเช็คอิน</label>
                         <select class="form-control" id="sel1" name="place">
-                            <option value=4>คณะวิทยาการสารสนเทศ</option>
-                            <option value=5>เสริมไทยคอมเพล็กซ์</option>
-                            <option value=6>ตลาดน้อย มมส.</option>
+                            <?php
+                                include 'server.php';
+                                while ($row =  $place->fetch_assoc()) {
+                                    ?><option value='<?=$row['placeid']?>'><?=$row['placename']?></option><?php
+                                }
+                            ?>
                         </select>
                     </div>
                 </div>

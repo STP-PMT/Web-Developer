@@ -7,9 +7,9 @@ $dbname = 'thaichana';
 $date = date("Y-m-d") . " " . date('H:i:s', time() - date('Z') + 010700);
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// $stmt = $conn->prepare('');
-// $stmt->bind_param();
-// $stmt->execute();
+$stmt = $conn->prepare('select * from place');
+$stmt->execute();
+$place = $stmt->get_result();
 
 if(isset($_GET['checkin'])){
     echo 1;
