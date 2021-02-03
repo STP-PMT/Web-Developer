@@ -9,7 +9,7 @@ $dbname = 'thaichana';
 // $time = date('H:i:s', time() - date('Z') + 010700);
 // $date = date_create(date("Y-m-d"));
 $date = date("d-m-Y") . " " . date('H:i:s');
-$dates =date("d-m-Y") . " " . date('H:i:s',time()-date('H:i:s')+75*60);
+$dates =date("d-m-Y") . " " . date('H:i:s',strtotime('+1 hour,15 min'));
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 $stmt = $conn->prepare('select * from place');
@@ -20,7 +20,7 @@ if (isset($_GET['checkin'])) {
     $phone = $_GET['phoneno'];
     if (is_numeric($phone) and strlen($phone) == 10) {
         $_SESSION["msg"] = '1';
-        echo $date.'<br>'.$dates ;
+        echo $date.' '.$dates ;
     } else {
         $_SESSION["msg"] = '2';
     }
