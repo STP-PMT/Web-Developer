@@ -41,7 +41,7 @@
                             <?php
                                 include 'server.php';
                                 while ($row =  $place->fetch_assoc()) {
-                                    ?><option value='<?=$row['placeid']?>'><?=$row['placename']?></option><?php
+                                    ?><option value=<?=$row['placeid']?>><?=$row['placename']?></option><?php
                                 }
                             ?>
                         </select>
