@@ -19,10 +19,14 @@ $place = $stmt->get_result();
 if (isset($_GET['checkin'])) {
     $phone = $_GET['phoneno'];
     if (is_numeric($phone) and strlen($phone) == 10) {
+        $stmt = $conn->prepare('insert INTO checkstatus(checkin, checkout, placeid,phoneno) VALUES (?,?,?,?)');
+        $stmt->bind_param('ssii',$date,$dats,$_GET['place'],$phone);
+        $stmt->execute();
+        $place = $stmt->affected_rows;
+        echo $place;
         $_SESSION["msg"] = '1';
-        echo $date.' '.$dates ;
     } else {
         $_SESSION["msg"] = '2';
     }
-    // header('location:index.php');
+    //header('location:index.php');
 }
