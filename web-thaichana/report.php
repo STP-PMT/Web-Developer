@@ -76,18 +76,20 @@
         </form>
     </div>
     <?php
-    error_reporting(0);
-    session_start();
+    
 
     if (isset($_POST['port'])) {
-        $stmt = $conn->prepare('select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? and checkstatus.checkid LIKE ?');
         $date = date_create($_POST['datestart']);
-        $d = "'%" . date_format($date, "Y-m-d") . "%'";
-        $stmt->bind_param('is', $_POST['place'], $d);
+        $d = date_format($date, "Y-m-d");
+        echo $d;
+        $stmt = $conn->prepare("select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? or checkstatus.checkid LIKE '%".$d."%'");
+      
+        $stmt->bind_param('i', $_POST['place']);
         $stmt->execute();
+        var_dump($stmt);
         $result = $stmt->get_result();
 
-        if ($stmt->affected_rows != 0) {
+        if ($stmt->affected_rows >=0) {
     ?>
             <div class="container border  rounded" style="width: 500px; margin-top: 10px;  text-align: center;">
                 <div class="row">
