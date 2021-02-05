@@ -1,6 +1,7 @@
 <html>
 
 <head>
+<?php  include 'server.php';?>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
 </head>
@@ -40,7 +41,7 @@
                     <div class="form-group">
                         <select class="form-control" id="sel1" name="place">
                             <?php
-                            include 'server.php';
+                           
                             while ($row =  $place->fetch_assoc()) {
                             ?><option value=<?= $row['placeid'] ?>><?= $row['placename'] ?></option><?php
                                                                                                 }
@@ -76,52 +77,48 @@
         </form>
     </div>
     <?php
-    
+
 
     if (isset($_POST['port'])) {
         $date = date_create($_POST['datestart']);
-        $d = date_format($date, "Y-m-d");
-        echo $d;
-        $stmt = $conn->prepare("select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? or checkstatus.checkid LIKE '%".$d."%'");
-      
+        $d = "'%".date_format($date, "Y-m-d")."%'";
+        $stmt = $conn->prepare("select DISTINCT placename,checkin,checkout,phoneno FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? and checkstatus.checkin LIKE '%".date_format($date, "Y-m-d")."%' or checkstatus.checkout LIKE '%".date_format($date, "Y-m-d")."%' order by placename");
         $stmt->bind_param('i', $_POST['place']);
         $stmt->execute();
-        var_dump($stmt);
         $result = $stmt->get_result();
 
-        if ($stmt->affected_rows >=0) {
-    ?>
-            <div class="container border  rounded" style="width: 500px; margin-top: 10px;  text-align: center;">
+        if ($stmt->affected_rows >0) {
+    ?><div class="container border  rounded" style="width: 800px; margin-top: 10px;  text-align: center;">
                 <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-4">ไม่มีข้อมูล</div>
-                    <div class="col-4"></div>
+                    <div class="col-3 bg-secondary text-light">สถานที่</div>
+                    <div class="col-3 bg-secondary text-light">เช็คอิน</div>
+                    <div class="col-3 bg-secondary text-light">เช็คเอ๊า</div>
+                    <div class="col-3 bg-secondary text-light">หมายเลขโทรศัพท์</div>
                 </div>
-            <?php
-        } else {
-            ?>
-                <div class="container border  rounded" style="width: 800px; margin-top: 10px;  text-align: center;">
+                <?php
+                while ($row = $result->fetch_assoc()) {
+                ?>
                     <div class="row">
-                        <div class="col-3 bg-secondary text-light">สถานที่</div>
-                        <div class="col-3 bg-secondary text-light">เช็คอิน</div>
-                        <div class="col-3 bg-secondary text-light">เช็คเอ๊า</div>
-                        <div class="col-3 bg-secondary text-light">หมายเลขโทรศัพท์</div>
+                        <div class="col-3"><?= $row['placename'] ?></div>
+                        <div class="col-3"><?= $row['checkin'] ?></div>
+                        <div class="col-3"><?= $row['checkout'] ?></div>
+                        <div class="col-3"><?= $row['phoneno'] ?></div>
                     </div>
-                    <?php
-                    while ($row = $result->fetch_assoc()) {
-                    ?>
-                        <div class="row">
-                            <div class="col-3"><?= $row['placename'] ?></div>
-                            <div class="col-3"><?= $row['checkin'] ?></div>
-                            <div class="col-3"><?= $row['checkout'] ?></div>
-                            <div class="col-3"><?= $row['phoneno'] ?></div>
-                        </div>
-            <?php
-                    }
+                <?php
                 }
+            } else {
+                ?><div class="container border  rounded" style="width: 500px; margin-top: 10px;  text-align: center;">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">ไม่มีข้อมูล</div>
+                        <div class="col-4"></div>
+                    </div>
+            <?php
+
             }
+        }
             ?>
-        </div>
+                </div>
 </body>
 
 </html>
