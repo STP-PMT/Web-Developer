@@ -80,14 +80,14 @@
     session_start();
 
     if (isset($_POST['port'])) {
-        $stmt = $conn->prepare('select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? or checkstatus.checkid LIKE ? or checkstatus.checkout LIKE ?');
+        $stmt = $conn->prepare('select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? and checkstatus.checkid LIKE ?');
         $date = date_create($_POST['datestart']);
         $d = "'%" . date_format($date, "Y-m-d") . "%'";
-        $stmt->bind_param('iss', $_POST['place'], $d, $d);
+        $stmt->bind_param('is', $_POST['place'], $d);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($stmt->affected_rows == 0) {
+        if ($stmt->affected_rows != 0) {
     ?>
             <div class="container border  rounded" style="width: 500px; margin-top: 10px;  text-align: center;">
                 <div class="row">
@@ -106,7 +106,6 @@
                         <div class="col-3 bg-secondary text-light">หมายเลขโทรศัพท์</div>
                     </div>
                     <?php
-                    $result = $_SESSION['result'];
                     while ($row = $result->fetch_assoc()) {
                     ?>
                         <div class="row">
