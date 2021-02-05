@@ -1,4 +1,3 @@
-<?php session_start();?>
 <html>
 
 <head>
@@ -40,9 +39,12 @@
                 <div class="col-6"><br><label>เลือกสถานที่</label>
                     <div class="form-group">
                         <select class="form-control" id="sel1" name="place">
-                            <option value=4>คณะวิทยาการสารสนเทศ</option>
-                            <option value=5>เสริมไทยคอมเพล็กซ์</option>
-                            <option value=6>ตลาดน้อย มมส.</option>
+                            <?php
+                            include 'server.php';
+                            while ($row =  $place->fetch_assoc()) {
+                            ?><option value=<?= $row['placeid'] ?>><?= $row['placename'] ?></option><?php
+                                                                                                }
+                                                                                                    ?>
                         </select>
                     </div>
                 </div>
@@ -67,13 +69,58 @@
             </div>
             <div class="row">
                 <div class="col-3"></div>
-                <div class="col-6"><input type="submit" value="แสดงรายงาน" class="btn btn-success btn-block"></input><br><br></div>
+                <div class="col-6"><input type="submit" name="port" class="btn btn-success btn-block"></input><br><br></div>
                 <div class="col-3"></div>
             </div>
 
         </form>
     </div>
+    <?php
+    error_reporting(0);
+    session_start();
 
+    if (isset($_POST['port'])) {
+        $stmt = $conn->prepare('select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? or checkstatus.checkid LIKE ? or checkstatus.checkout LIKE ?');
+        $date = date_create($_POST['datestart']);
+        $d = "'%" . date_format($date, "Y-m-d") . "%'";
+        $stmt->bind_param('iss', $_POST['place'], $d, $d);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($stmt->affected_rows == 0) {
+    ?>
+            <div class="container border  rounded" style="width: 500px; margin-top: 10px;  text-align: center;">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">ไม่มีข้อมูล</div>
+                    <div class="col-4"></div>
+                </div>
+            <?php
+        } else {
+            ?>
+                <div class="container border  rounded" style="width: 800px; margin-top: 10px;  text-align: center;">
+                    <div class="row">
+                        <div class="col-3 bg-secondary text-light">สถานที่</div>
+                        <div class="col-3 bg-secondary text-light">เช็คอิน</div>
+                        <div class="col-3 bg-secondary text-light">เช็คเอ๊า</div>
+                        <div class="col-3 bg-secondary text-light">หมายเลขโทรศัพท์</div>
+                    </div>
+                    <?php
+                    $result = $_SESSION['result'];
+                    while ($row = $result->fetch_assoc()) {
+                    ?>
+                        <div class="row">
+                            <div class="col-3"><?= $row['placename'] ?></div>
+                            <div class="col-3"><?= $row['checkin'] ?></div>
+                            <div class="col-3"><?= $row['checkout'] ?></div>
+                            <div class="col-3"><?= $row['phoneno'] ?></div>
+                        </div>
+            <?php
+                    }
+                }
+            }
+            ?>
+        </div>
 </body>
 
 </html>
