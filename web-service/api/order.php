@@ -4,23 +4,19 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 // insert
-$app->post('/products', function (Request $request, Response $response, $args) {
+$app->post('/order', function (Request $request, Response $response, $args) {
     $body = $request->getBody();
     $bodyArray = json_decode($body, true);
 
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare('insert into products (productCode,productName,productLine,productScale,productVendor,productDescription,quantityInStock,buyPrice,MSRP) values(?,?,?,?,?,?,?,?,?)');
+    $stmt = $conn->prepare('insert into manage (menuID,tableID,amount,total) values(?,?,?,?)');
     $stmt->bind_param(
-        'ssssssidd',
-        $bodyArray['productCode'],
-        $bodyArray['productName'],
-        $bodyArray['productLine'],
-        $bodyArray['productScale'],
-        $bodyArray['productVendor'],
-        $bodyArray['productDescription'],
-        $bodyArray['quantityInStock'],
-        $bodyArray['buyPrice'],
-        $bodyArray['MSRP']
+        'iiii',
+        $bodyArray['menuID'],
+        $bodyArray['tableID'],
+        $bodyArray['amount'],
+        $bodyArray['total']
+  
     );
 
     $stmt->execute();
@@ -78,9 +74,9 @@ $app->get('/products/{delete_id}', function (Request $request, Response $respons
 });
 
 // seacrh
-$app->get('/products', function (Request $request, Response $response, $args) {
+$app->get('/table', function (Request $request, Response $response, $args) {
     $condb = $GLOBALS['conn'];
-    $stmt = $condb->prepare('select * from products');
+    $stmt = $condb->prepare('select * from tables');
     $stmt->execute();
     $result =  $stmt->get_result();
     $data = array();

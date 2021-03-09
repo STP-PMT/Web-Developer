@@ -28,18 +28,18 @@ if (isset($_GET['checkin'])) {
     header('location:index.php');
 }
 
-if (isset($_POST['port'])) {
-    $stmt = $conn->prepare('select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? or checkstatus.checkid LIKE ? or checkstatus.checkout LIKE ?');
-    $date = date_create($_POST['datestart']);
-    $d = "'%".date_format($date,"Y-m-d")."%'";
-    $stmt->bind_param('iss',$_POST['place'],$d,$d);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// if (isset($_POST['port'])) {
+//     $stmt = $conn->prepare('select * FROM checkstatus,place WHERE checkstatus.placeid = place.placeid and checkstatus.placeid=? or checkstatus.checkid LIKE ? or checkstatus.checkout LIKE ?');
+//     $date = date_create($_POST['datestart']);
+//     $d = "'%".date_format($date,"Y-m-d")."%'";
+//     $stmt->bind_param('iss',$_POST['place'],$d,$d);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
     
-    if($stmt->affected_rows==0){
-        $_SESSION['report']=1;
-    }else{
-        $_SESSION['result']=$result;
-        $_SESSION['report']=2;
-    }
-}
+//     if($stmt->affected_rows==0){
+//         $_SESSION['report']=1;
+//     }else{
+//         $_SESSION['result']=$result;
+//         $_SESSION['report']=2;
+//     }
+// }
