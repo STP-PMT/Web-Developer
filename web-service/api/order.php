@@ -74,6 +74,25 @@ $app->get('/products/{delete_id}', function (Request $request, Response $respons
 });
 
 // seacrh
+$app->get('/order/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $condb = $GLOBALS['conn'];
+    $stmt = $condb->prepare('select menuName,menuPrice,amount,total FROM menu,manage WHERE menu.ID = menuID and tableID =?');
+    $stmt->bind_param(
+        'i',$id
+    );
+    $stmt->execute();
+    $result =  $stmt->get_result();
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($data, $row);
+    }
+    $json = json_encode($data);
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
+});
+
+// seacrh
 $app->get('/table', function (Request $request, Response $response, $args) {
     $condb = $GLOBALS['conn'];
     $stmt = $condb->prepare('select * from tables');
