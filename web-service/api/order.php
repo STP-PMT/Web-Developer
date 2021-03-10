@@ -26,25 +26,20 @@ $app->post('/order', function (Request $request, Response $response, $args) {
 });
 
 // update
-$app->post('/products/{update_id}', function (Request $request, Response $response, $args) {
-    $update_id = $args['update_id'];
+$app->post('/order/{menu_id}/{table_id}', function (Request $request, Response $response, $args) {
+    $menu_id = $args['menu_id'];
+    $table_id =$args['table_id'];
     $body = $request->getBody();
     $bodyArray = json_decode($body, true);
 
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare('update products SET productCode=?,productName=?,productLine=?,productScale=?,productVendor=?,productDescription=?,quantityInStock=?,buyPrice=?,MSRP=? WHERE productCode=?');
+    $stmt = $conn->prepare('update manage SET amount=?,total=? WHERE menuID=? and tableID=?');
     $stmt->bind_param(
-        'ssssssidds',
-        $bodyArray['productCode'],
-        $bodyArray['productName'],
-        $bodyArray['productLine'],
-        $bodyArray['productScale'],
-        $bodyArray['productVendor'],
-        $bodyArray['productDescription'],
-        $bodyArray['quantityInStock'],
-        $bodyArray['buyPrice'],
-        $bodyArray['MSRP'],
-        $update_id
+        'iiii',
+        $bodyArray['amount'],
+        $bodyArray['total'],
+        $menu_id,
+        $table_id
     );
 
     $stmt->execute();
@@ -77,7 +72,7 @@ $app->get('/products/{delete_id}', function (Request $request, Response $respons
 $app->get('/order/{id}', function (Request $request, Response $response, $args) {
     $id = $args['id'];
     $condb = $GLOBALS['conn'];
-    $stmt = $condb->prepare('select menuID,menuName,menuPrice,amount,total FROM menu,manage WHERE menu.ID = menuID and tableID =?');
+    $stmt = $condb->prepare('select tableID,menuID,menuName,menuPrice,amount,total FROM menu,manage WHERE menu.ID = menuID and tableID =?');
     $stmt->bind_param(
         'i',$id
     );
