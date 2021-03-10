@@ -77,7 +77,7 @@ $app->get('/products/{delete_id}', function (Request $request, Response $respons
 $app->get('/order/{id}', function (Request $request, Response $response, $args) {
     $id = $args['id'];
     $condb = $GLOBALS['conn'];
-    $stmt = $condb->prepare('select menuName,menuPrice,amount,total FROM menu,manage WHERE menu.ID = menuID and tableID =?');
+    $stmt = $condb->prepare('select menuID,menuName,menuPrice,amount,total FROM menu,manage WHERE menu.ID = menuID and tableID =?');
     $stmt->bind_param(
         'i',$id
     );
