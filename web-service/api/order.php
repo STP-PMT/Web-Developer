@@ -15,7 +15,8 @@ $app->post('/order', function (Request $request, Response $response, $args) {
         $bodyArray['menuID'],
         $bodyArray['tableID'],
         $bodyArray['amount'],
-        $bodyArray['total']
+        $bodyArray['total'],
+       
   
     );
 
@@ -89,20 +90,7 @@ $app->get('/order/{id}', function (Request $request, Response $response, $args) 
     return $response->withHeader('content-Type', 'application/json');
 });
 
-// seacrh
-$app->get('/table', function (Request $request, Response $response, $args) {
-    $condb = $GLOBALS['conn'];
-    $stmt = $condb->prepare('select * from tables');
-    $stmt->execute();
-    $result =  $stmt->get_result();
-    $data = array();
-    while ($row = $result->fetch_assoc()) {
-        array_push($data, $row);
-    }
-    $json = json_encode($data);
-    $response->getBody()->write($json);
-    return $response->withHeader('content-Type', 'application/json');
-});
+
 
 $app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Response $response, $args) {
     $field = $args['seacrh_field'];
