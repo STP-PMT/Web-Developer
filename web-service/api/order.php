@@ -49,14 +49,16 @@ $app->post('/order/{menu_id}/{table_id}', function (Request $request, Response $
 });
 
 // delete
-$app->get('/products/{delete_id}', function (Request $request, Response $response, $args) {
-    $delete_id = $args['delete_id'];
+$app->get('/order/{menu_id}/{table_id}', function (Request $request, Response $response, $args) {
+    $menu_id = $args['menu_id'];
+    $table_id = $args['table_id'];
 
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare('delete FROM products WHERE productCode=?');
+    $stmt = $conn->prepare('delete FROM manage WHERE menuID=? and tableID=?');
     $stmt->bind_param(
-        's',
-        $delete_id
+        'ii',
+        $menu_id,
+        $table_id
     );
 
     $stmt->execute();
