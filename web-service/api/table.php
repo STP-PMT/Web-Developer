@@ -15,4 +15,5 @@ $app->get('/table', function (Request $request, Response $response, $args) {
     $response->getBody()->write($json);
     return $response->withHeader('content-Type', 'application/json');
 });
+
 ?>

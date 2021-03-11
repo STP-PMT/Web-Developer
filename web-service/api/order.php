@@ -15,9 +15,7 @@ $app->post('/order', function (Request $request, Response $response, $args) {
         $bodyArray['menuID'],
         $bodyArray['tableID'],
         $bodyArray['amount'],
-        $bodyArray['total'],
-       
-  
+        $bodyArray['total']
     );
 
     $stmt->execute();
