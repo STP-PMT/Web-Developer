@@ -69,6 +69,24 @@ $app->get('/order/{menu_id}/{table_id}', function (Request $request, Response $r
     return $response;
 });
 
+$app->get('/manage/{table_id}', function (Request $request, Response $response, $args) {
+    $table_id = $args['table_id'];
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('delete FROM manage WHERE tableID=?');
+    $stmt->bind_param(
+        'i',
+        $table_id
+    );
+
+    $stmt->execute();
+    $result = $stmt->affected_rows;
+    if ($result >= 0) {
+        $json = json_encode('deleted ' . $result . ' row');
+    }
+    $response->getBody()->write($json);
+    return $response;
+});
+
 // seacrh
 $app->get('/order/{id}', function (Request $request, Response $response, $args) {
     $id = $args['id'];
