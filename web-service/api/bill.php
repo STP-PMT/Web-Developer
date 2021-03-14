@@ -10,12 +10,13 @@ $app->post('/receipt', function (Request $request, Response $response, $args) {
     $data = json_encode($bodyArray['data'], true);
 
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare('insert into receipt (tableID,date,data) values(?,?,?)');
+    $stmt = $conn->prepare('insert into receipt (tableID,date,data,sum) values(?,?,?,?)');
     $stmt->bind_param(
-        'iss',
+        'issi',
         $bodyArray['tableID'],
         $bodyArray['date'],
-        $data
+        $data,
+        $bodyArray['sum']
     );
 
     $stmt->execute();
@@ -31,7 +32,7 @@ $app->get('/receiptmax', function (Request $request, Response $response, $args) 
     $result =  $stmt->get_result();
     $data = array();
     while ($row = $result->fetch_assoc()) {
-        array_push($data, $row);
+        $data = $row['max'];
     }
     $json = json_encode($data);
     $response->getBody()->write($json);
@@ -40,7 +41,7 @@ $app->get('/receiptmax', function (Request $request, Response $response, $args) 
 
 $app->get('/receipt', function (Request $request, Response $response, $args) {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare('select ID,tableID,date from receipt');
+    $stmt = $conn->prepare('select ID,tableID,date,sum from receipt');
     $stmt->execute();
     $result =  $stmt->get_result();
     $data =array();
@@ -66,6 +67,27 @@ $app->get('/receipt/{id}', function (Request $request, Response $response, $args
     $data =array();
     while ($row = $result->fetch_assoc()) {
         $data=json_decode($row['data']);
+        // array_push($data,json_decode($row['data']));
+    }
+    $json = json_encode($data);
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
+});
+
+$app->get('/receiptsum/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('select sum from receipt where ID = ?');
+    $stmt->bind_param(
+        'i',
+        $id
+    );
+    $stmt->execute();
+    $result =  $stmt->get_result();
+    
+    $data =array();
+    while ($row = $result->fetch_assoc()) {
+        $data=json_decode($row['sum']);
         // array_push($data,json_decode($row['data']));
     }
     $json = json_encode($data);
