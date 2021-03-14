@@ -91,7 +91,7 @@ $app->get('/manage/{table_id}', function (Request $request, Response $response, 
 $app->get('/order/{id}', function (Request $request, Response $response, $args) {
     $id = $args['id'];
     $condb = $GLOBALS['conn'];
-    $stmt = $condb->prepare('select tableID,menuID,menuName,menuPrice,amount,total FROM menu,manage WHERE menu.ID = menuID and tableID =?');
+    $stmt = $condb->prepare('select tableID,menuID,menuName,menuPrice,amount,total,menu.groups FROM menu,manage WHERE menu.ID = menuID and tableID =?');
     $stmt->bind_param(
         'i',$id
     );
@@ -105,8 +105,24 @@ $app->get('/order/{id}', function (Request $request, Response $response, $args) 
     $response->getBody()->write($json);
     return $response->withHeader('content-Type', 'application/json');
 });
-
-
+//sum order total
+$app->get('/ordersum/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $condb = $GLOBALS['conn'];
+    $stmt = $condb->prepare('select SUM(total) as sum FROM menu,manage WHERE menu.ID = menuID and tableID =?');
+    $stmt->bind_param(
+        'i',$id
+    );
+    $stmt->execute();
+    $result =  $stmt->get_result();
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($data, $row["sum"]);
+    }
+    $json = json_encode($data);
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
+});
 
 $app->get('/products/{seacrh_field}/{keyword}', function (Request $request, Response $response, $args) {
     $field = $args['seacrh_field'];
