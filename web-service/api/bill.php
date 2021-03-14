@@ -24,7 +24,7 @@ $app->post('/receipt', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/receipt', function (Request $request, Response $response, $args) {
+$app->get('/receiptmax', function (Request $request, Response $response, $args) {
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare('select max(ID) as max from receipt');
     $stmt->execute();
@@ -32,6 +32,41 @@ $app->get('/receipt', function (Request $request, Response $response, $args) {
     $data = array();
     while ($row = $result->fetch_assoc()) {
         array_push($data, $row);
+    }
+    $json = json_encode($data);
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
+});
+
+$app->get('/receipt', function (Request $request, Response $response, $args) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('select ID,tableID,date from receipt');
+    $stmt->execute();
+    $result =  $stmt->get_result();
+    $data =array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($data,$row);
+    }
+    $json = json_encode($data);
+    $response->getBody()->write($json);
+    return $response->withHeader('content-Type', 'application/json');
+});
+
+$app->get('/receipt/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare('select data from receipt where ID = ?');
+    $stmt->bind_param(
+        'i',
+        $id
+    );
+    $stmt->execute();
+    $result =  $stmt->get_result();
+    
+    $data =array();
+    while ($row = $result->fetch_assoc()) {
+        $data=json_decode($row['data']);
+        // array_push($data,json_decode($row['data']));
     }
     $json = json_encode($data);
     $response->getBody()->write($json);
